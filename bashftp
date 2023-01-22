@@ -1,0 +1,19 @@
+#!/bin/sh
+echo "assigning variables"
+HOST='Redacted'
+USER="Redacted.${3}"
+PASSWD='Redacted'
+cd $4
+
+echo "starting ftp"
+ftp -p -n $HOST <<END_SCRIPT
+quote USER $USER
+quote PASS $PASSWD
+binary
+cd $2
+put $1
+quit
+END_SCRIPT
+cd ..
+echo "finished"
+exit 0
